@@ -1,0 +1,23 @@
+name: qwert
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    environment: Production
+
+    steps:
+      - name: Test Production Environment
+        run: echo "Production Environment is working!"
+
+      - name: Check Production Secret
+        run: |
+          if [ -n "${{ secrets.PROD_SECRET }}" ]; then
+            echo "Production secret is available!"
+          else
+            echo "Production secret is NOT available!"
+            exit 1
+          fi
