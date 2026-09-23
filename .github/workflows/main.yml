@@ -1,0 +1,23 @@
+name: Test Environment
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    environment: development
+
+    steps:
+      - name: Test Environment
+        run: echo "My development environment is working!"
+
+      - name: Test Secret
+        run: |
+          if [ -n "${{ secrets.MY_SECRET }}" ]; then
+            echo "MY_SECRET is available!"
+          else
+            echo "MY_SECRET is NOT available!"
+            exit 1
+          fi
